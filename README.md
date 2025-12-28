@@ -1,4 +1,4 @@
-# Home Assistant Add-ons by henryhst
+# Home Assistant Add-ons by Gregor. A fork of henryhst
 
 ![Project Maintenance][maintenance-shield]
 [![License][license-shield]](LICENSE)
