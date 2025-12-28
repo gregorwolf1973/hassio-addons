@@ -50,13 +50,12 @@ RUN \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Install netboot.xyz webapp
+# Install netboot.xyz webapp (latest from master branch)
 WORKDIR /app
-ARG NETBOOTXYZ_VERSION
 RUN \
-    echo "Installing netboot.xyz webapp version: ${NETBOOTXYZ_VERSION}" \
+    echo "Installing latest netboot.xyz webapp from master branch..." \
     && curl -fsSL -o /tmp/webapp.tar.gz \
-        "https://github.com/netbootxyz/webapp/archive/${NETBOOTXYZ_VERSION}.tar.gz" \
+        "https://github.com/netbootxyz/webapp/archive/refs/heads/master.tar.gz" \
     && tar xzf /tmp/webapp.tar.gz -C /app/ --strip-components=1 \
     && npm install --omit=dev \
     && echo "Applying security patches..." \
@@ -75,6 +74,8 @@ ENV WEB_APP_PORT='3000'
 
 # Copy root filesystem
 COPY root/ /
+COPY root/assets/netboot.xyz.kpxe /tftpboot/netboot.xyz.kpxe
+COPY root/assets/netboot.xyz.efi /tftpboot/netboot.xyz.efi
 
 # Set executable permissions for scripts
 RUN chmod +x /start.sh /init.sh
