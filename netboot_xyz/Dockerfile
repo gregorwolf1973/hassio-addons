@@ -50,6 +50,7 @@ RUN \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
+
 # Install netboot.xyz webapp (latest from master branch)
 WORKDIR /app
 RUN \
